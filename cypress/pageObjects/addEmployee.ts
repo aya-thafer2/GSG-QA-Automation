@@ -7,6 +7,7 @@ class addEmployee
         EmployeeInputName: () => cy.get('.--name-grouped-field'),
         saveNewEmp: () => cy.get('button[type="submit"]'),
         createLoginDetailsSwitch: () => cy.get('.oxd-switch-wrapper'),
+        //FIXME:
         userName: () => cy.get('#app > div.oxd-layout > div.oxd-layout-container > div.oxd-layout-context > div > div > form > div.orangehrm-employee-container > div.orangehrm-employee-form > div:nth-child(4) > div > div:nth-child(1) > div > div:nth-child(2) > input'),
         password: () => cy.get('[type="password"]'),
         saveBtn:()=> cy.get('[type="submit"]'),
@@ -25,7 +26,8 @@ class addEmployee
      this.elements.password().eq(0).type('123456h');
      this.elements.password().eq(1).type('123456h');
      this.elements.saveBtn().click();
-     cy.wait(5000); 
+     //FIXME: 
+     cy.wait(5000); //FIX THIS 
      this.elements.editEmployeeName().should('exist');
 
     }
