@@ -7,8 +7,11 @@ describe("Employee Functionality", () => {
     beforeEach(()=>{
         cy.visit('/web/index.php/auth/login');
         LoginObj.login('Admin','admin123');
+        cy.fixture('employeeInfo').as('EmpInfo')
     })
     it('Add New employee using UI', () => {
-        addEmployeeObj.addNewEmployee("Hakoona"," ","Matata");
+        cy.get('@EmpInfo').then((infoData: any)=>{
+            addEmployeeObj.addNewEmployee(infoData.FirstName, infoData.MiddleName, infoData.LastName);
+        })
     })
 })
