@@ -45,7 +45,7 @@ describe("AdminAPI", () => {
         
        })
    })
-   //FIXME:
+   //TODO:
    // Write IT AS afterEach instead******************
    it('Delete user', ()=>{
     cy.request({
