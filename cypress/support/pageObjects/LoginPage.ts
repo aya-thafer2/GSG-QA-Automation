@@ -19,11 +19,8 @@ class LoginPage{
         this.elements.forgetPassword().click();
         this.elements.resetUserName().type(resetUserName);
         this.elements.resetBtn().click();
-    }
-    assertion(){
         this.elements.forgetPasswordTitle().should('contain','Reset Password link sent successfully');
     }
-    
 
 }
 export default LoginPage;
