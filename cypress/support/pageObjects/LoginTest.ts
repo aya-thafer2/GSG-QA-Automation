@@ -14,7 +14,10 @@ class LoginTest{
         this.elements.UserName().type(userName);
         this.elements.Password().type(password);
         this.elements.LoginBtn().click();
-        this.elements.Dashboard().should('contain','Dashboard');
+        //this.elements.Dashboard().should('contain','Dashboard');
+        //TODO:
+        // instead TRY this: 
+        cy.contains('.oxd-topbar-header-title',"Dashboard").should("exist");
     }
 
     invalidLogin(userName:string, password:string){
@@ -22,8 +25,7 @@ class LoginTest{
         this.elements.Password().type(password);
         this.elements.LoginBtn().click();
         this.elements.errorAlert().should('contain','Invalid credentials');
-        //TODO:
-        // instead TRY this: cy.contains('.oxd-topbar-header-title',"Dashboard").should("exist");
+        
     }
 
     invalidLoginBothEmpty(){
