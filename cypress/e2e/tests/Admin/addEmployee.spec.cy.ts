@@ -7,7 +7,6 @@ const addEmployeeObj:addEmployee = new addEmployee();
 const employeePersonalInfoObj: employeePersonalInfo = new employeePersonalInfo();
 const employeeTableObj:employeeTable = new employeeTable();
 
-
 describe("Employee's Table data validation (Add new Employee)", () => {
     beforeEach(()=>{
         cy.intercept("/web/index.php/dashboard/index").as("LoginPage");
