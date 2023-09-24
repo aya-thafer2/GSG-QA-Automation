@@ -1,4 +1,6 @@
 import employee from "../interfaces/employee";
+import { waitUntilVisible } from "../utils/waitUntilVisible";
+
 class addEmployee
 {
     private id: any;
@@ -20,14 +22,13 @@ class addEmployee
         password: () => cy.get('[type="password"]'),
         saveBtn:()=> cy.get('[type="submit"]'),
         editEmployeeName: ()=> cy.get('.orangehrm-edit-employee-name'),
-        spinner: ()=> cy.get('.oxd-form-loader'),
+        loader: ()=>cy.get('.oxd-loading-spinner')
     }
     
     selectPIM(){
         this.elements.MainMenuItems().contains('PIM').click();
     }
 
-    
     addNewEmployee(firstName:string, MiddleName:string, LastName:string){
      this.elements.AddEmp().eq(1).click();
      this.elements.EmployeeInputName().children().eq(0).type(firstName);
@@ -45,9 +46,7 @@ class addEmployee
      this.elements.password().eq(0).type('123456h');
      this.elements.password().eq(1).type('123456h');
      this.elements.saveBtn().click();
-     //FIXME: 
-     cy.wait(5000); //FIX THIS 
-     //this.elements.spinner().should("not.be.visible");
+     waitUntilVisible(this.elements.loader());
      this.elements.editEmployeeName().should('contain',firstName+' '+LastName);
      
     }
@@ -58,6 +57,7 @@ class addEmployee
         });
       }
       
+     
     
 
     

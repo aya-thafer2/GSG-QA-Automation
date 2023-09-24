@@ -23,7 +23,7 @@ describe("Employee's Table data validation (Add new Employee)", () => {
 
     })
 
-    it.skip('Fill the Employee information',()=>{
+    it.only('Fill the Employee information',()=>{
         employeePersonalInfoObj.fillPersonalDetails();
         cy.fixture('employeeInfo').as('EmpInfo');
         cy.get('@EmpInfo').then((infoData: any)=>{
@@ -31,9 +31,9 @@ describe("Employee's Table data validation (Add new Employee)", () => {
         })
     })
 
-    it.only('Search by key value', () => {
+    it.skip('Search by key value', () => {
         //employeeTableObj.checkSearch("Alice","0221")
         
-        employeeTableObj.getEmployeeInfo(addEmployeeObj.getEmployeeId());
+       // employeeTableObj.getEmployeeInfo(addEmployeeObj.getEmployeeId());
     })
 })

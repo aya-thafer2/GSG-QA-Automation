@@ -1,3 +1,6 @@
+import { waitUntilVisible,waitUntilVisible2 } from "../utils/waitUntilVisible";
+
+
 class employeePersonalInfo{
 
     elements={
@@ -23,13 +26,15 @@ class employeePersonalInfo{
         selectMaritalStatus:()=>cy.get('.oxd-select-dropdown > :nth-child(2)'),
         smoker:()=>cy.get(':nth-child(2) > .oxd-checkbox-wrapper > label > .oxd-checkbox-input > .oxd-icon'),
         personalDetailsSaveBtn:()=>cy.get(':nth-child(1) > .oxd-form > .oxd-form-actions > .oxd-button'),
+        loader: ()=>cy.get('.oxd-loading-spinner'),
+
     }
 
     fillEmployeeInfo(firstName:string, LastName:string){
         this.elements.job().click({force:true});
-        //FIXME: 
-        cy.wait(2000); //FIX THIS 
+        waitUntilVisible2(this.elements.loader());
         this.elements.jobTitle().click({force:true});
+        waitUntilVisible2(this.elements.loader());
         this.elements.selectJobTitle().click({force:true});
         this.elements.employmentStatus().click({force:true});
         this.elements.selectEmploymentStatus().click({force:true});
@@ -37,28 +42,25 @@ class employeePersonalInfo{
         this.elements.selectSubUnit().click({force:true});
         this.elements.jobSaveBtn().click({force:true});
         this.elements.reportTo().click({force:true});
+        waitUntilVisible2(this.elements.loader());
         this.elements.addSupervisor().click({force:true});
         this.elements.supervisorName().type(firstName+' '+LastName);
         this.elements.selectSupervisorName().click({force:true});
         this.elements.reportingMethod().click({force:true});
         this.elements.selectReportingMethod().click({force:true});
         this.elements.reportToSaveBtn().click({force:true});
-        //FIXME: 
-        cy.wait(3000); //FIX THIS 
+        waitUntilVisible(this.elements.loader())
     }
 
     fillPersonalDetails(){
-         //FIXME: 
-         cy.wait(3000); //FIX THIS 
-         this.elements.licenseExpiryDate().click({force:true});
+        waitUntilVisible2(this.elements.loader());
+        this.elements.licenseExpiryDate().click({force:true});
          this.elements.SelectLicenseExpiryDate().click({force:true});
          this.elements.maritalStatus().click({force:true});
          this.elements.selectMaritalStatus().click({force:true});
          this.elements.smoker().click({force:true});
          this.elements.personalDetailsSaveBtn().click({force:true});
-        
-         //FIXME: 
-        cy.wait(3000); //FIX THIS 
+        waitUntilVisible2(this.elements.loader());
     }
 
 
