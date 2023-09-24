@@ -1,36 +1,54 @@
 import employee from "../interfaces/employee";
+import { waitUntilVisible2 } from "../utils/waitUntilVisible";
 
 class employeeTable
 {
     elements={
-    
-        EmployeeName: () => cy.get('#app > div.oxd-layout > div.oxd-layout-container > div.oxd-layout-context > div > div.oxd-table-filter > div.oxd-table-filter-area > form > div.oxd-form-row > div > div:nth-child(1) > div > div:nth-child(2) > div > div > input'),
-        EmployeeId: () => cy.get('#app > div.oxd-layout > div.oxd-layout-container > div.oxd-layout-context > div > div.oxd-table-filter > div.oxd-table-filter-area > form > div.oxd-form-row > div > div:nth-child(2) > div > div:nth-child(2) > input'),
+        employeeListTap:()=>cy.get('.oxd-topbar-body-nav > ul > :nth-child(2)'),
+        EmployeeName: () => cy.get(':nth-child(1) > .oxd-input'),
+        EmployeeId: () => cy.get(':nth-child(2) > .oxd-input'),
         //TODO: the other fields
         SaveBtn: () => cy.get('.oxd-form-actions > .oxd-button--secondary'),
+        record:()=>cy.get('.oxd-table-card > .oxd-table-row'),
+        loader: ()=>cy.get('.oxd-loading-spinner')
 
     }
-    findEmp(employeeId:string,response: any): employee{
-        let emp:employee;
-        emp = response.body?.data.find((empl: employee) => empl.employeeId === employeeId);
-        return emp;
+
+    clickEmployeeListTap(){
+        this.elements.employeeListTap().click();
     }
-    getEmployeeInfo(employeeId: string){
+
+    // findEmp(employeeId:string,response: any): employee{
+    //     let emp = response.body?.data.find((empl: employee) => empl.employeeId === employeeId);
+    //     return emp;
+    // }
+    // getEmployeeInfo(employeeId: string):any{
+    //     cy.request({
+    //         method: "GET",
+    //         url: "/web/index.php/api/v2/pim/employees", 
+    //       }).then((response) => {
+    //         expect(response).property("status").to.equal(200);
+    //         return this.findEmp(employeeId,response);
+    //       });
+    // }
+
+    getJobDetails(EmpNumber:any){
         cy.request({
             method: "GET",
-            url: "/web/index.php/api/v2/pim/employees", 
+            url: `/web/index.php/api/v2/pim/employees/${EmpNumber}/job-details`,
           }).then((response) => {
             expect(response).property("status").to.equal(200);
-            this.findEmp(employeeId,response);
-           console.log( this.findEmp(employeeId,response));
+            console.log(response.body);
           });
     }
 
     //TODO: key,value
-    checkSearch(EmployeeName:string,id:string){
-        this.elements.EmployeeName().type(EmployeeName);
+    checkSearch(id:string){
         this.elements.EmployeeId().type(id);
         this.elements.SaveBtn().click({force:true});
+        waitUntilVisible2(this.elements.loader());
+        cy.contains('.oxd-table-card > .oxd-table-row',id).should("exist");
+        cy.contains('.oxd-table-body > :nth-child(1) > .oxd-table-row > :nth-child(2) > div',id).should("exist");
     }
    
 

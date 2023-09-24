@@ -6,6 +6,8 @@ const LoginObj:LoginPage = new LoginPage();
 const addEmployeeObj:addEmployee = new addEmployee();
 const employeePersonalInfoObj: employeePersonalInfo = new employeePersonalInfo();
 const employeeTableObj:employeeTable = new employeeTable();
+import employee from "../../../support/interfaces/employee";
+
 
 describe("Employee's Table data validation (Add new Employee)", () => {
     beforeEach(()=>{
@@ -17,13 +19,17 @@ describe("Employee's Table data validation (Add new Employee)", () => {
         addEmployeeObj.selectPIM();
         // **add new employee using API as a prerequisite & get the Employee's info data using fixture**
         cy.fixture('employeeInfo').as('EmpInfo');
-        cy.get('@EmpInfo').then((infoData: any)=>{
-            addEmployeeObj.addNewEmployee(infoData.FirstName, infoData.MiddleName, infoData.LastName);
+        cy.get('@EmpInfo').then((data: any)=>{
+            addEmployeeObj.addNewEmployee(data.FirstName, data.MiddleName, data.LastName, data.employeeId).then(()=>{
+                addEmployeeObj.createLoginDetails(data.username, data.password);
+            });
         })
 
     })
 
-    it.only('Fill the Employee information',()=>{
+    it.skip('Fill the Employee information',()=>{
+        addEmployeeObj.employeePersonalDetails();
+
         employeePersonalInfoObj.fillPersonalDetails();
         cy.fixture('employeeInfo').as('EmpInfo');
         cy.get('@EmpInfo').then((infoData: any)=>{
@@ -31,9 +37,24 @@ describe("Employee's Table data validation (Add new Employee)", () => {
         })
     })
 
-    it.skip('Search by key value', () => {
-        //employeeTableObj.checkSearch("Alice","0221")
+    it.only('Search by key value', async () => {
+        addEmployeeObj.employeePersonalDetails();
+        employeePersonalInfoObj.fillPersonalDetails();
+        cy.fixture('employeeInfo').as('EmpInfo');
+        cy.get('@EmpInfo').then((infoData: any)=>{
+            employeePersonalInfoObj.fillEmployeeInfo(infoData.FirstName, infoData.LastName);
+            employeeTableObj.clickEmployeeListTap();
+            
+            //let emp= employeeTableObj.getEmployeeInfo(infoData.employeeId);
+            // console.log(emp);
+            employeeTableObj.checkSearch(infoData.employeeId);
+            employeeTableObj.getJobDetails(addEmployeeObj.getEmpNumber());
+        })
         
-       // employeeTableObj.getEmployeeInfo(addEmployeeObj.getEmployeeId());
+
+
     })
+
+        //TODO: delete user
+
 })

@@ -1,5 +1,8 @@
 {
-    "FirstName":"Hakoona1",
+    "FirstName":"Hakoona",
     "MiddleName":" ",
-    "LastName":"Matata"
+    "LastName":"Matata",
+    "employeeId": "05416",
+    "username": "jensen1", 
+    "password": "123456h"
 }
