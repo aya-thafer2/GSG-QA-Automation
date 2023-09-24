@@ -6,55 +6,43 @@ const LoginObj:LoginPage = new LoginPage();
 const addEmployeeObj:addEmployee = new addEmployee();
 const employeePersonalInfoObj: employeePersonalInfo = new employeePersonalInfo();
 const employeeTableObj:employeeTable = new employeeTable();
-import employee from "../../../support/interfaces/employee";
 
 
 describe("Employee's Table data validation (Add new Employee)", () => {
     beforeEach(()=>{
         cy.intercept("/web/index.php/dashboard/index").as("LoginPage");
         cy.visit("/");
-        // **login to the system**
+        // **Login to the system**
         LoginObj.login("Admin", "admin123");
-        // **go to PIM page**
+        // **Go to PIM page**
         addEmployeeObj.selectPIM();
-        // **add new employee using API as a prerequisite & get the Employee's info data using fixture**
         cy.fixture('employeeInfo').as('EmpInfo');
+        // **Add new employee using API**
         cy.get('@EmpInfo').then((data: any)=>{
             addEmployeeObj.addNewEmployee(data.FirstName, data.MiddleName, data.LastName, data.employeeId).then(()=>{
                 addEmployeeObj.createLoginDetails(data.username, data.password);
             });
         })
-
     })
 
-    it.skip('Fill the Employee information',()=>{
-        addEmployeeObj.employeePersonalDetails();
-
-        employeePersonalInfoObj.fillPersonalDetails();
-        cy.fixture('employeeInfo').as('EmpInfo');
+    it('Fill the Employee information',()=>{
         cy.get('@EmpInfo').then((infoData: any)=>{
+            addEmployeeObj.employeePersonalDetails(infoData.FirstName, infoData.LastName);
+            employeePersonalInfoObj.fillPersonalDetails();
             employeePersonalInfoObj.fillEmployeeInfo(infoData.FirstName, infoData.LastName);
         })
     })
 
-    it.only('Search by key value', async () => {
-        addEmployeeObj.employeePersonalDetails();
-        employeePersonalInfoObj.fillPersonalDetails();
-        cy.fixture('employeeInfo').as('EmpInfo');
+    it('Search by Employee ID', () => {
+        //Fill the Employee information then Search
         cy.get('@EmpInfo').then((infoData: any)=>{
+            addEmployeeObj.employeePersonalDetails(infoData.FirstName, infoData.LastName);
+            employeePersonalInfoObj.fillPersonalDetails();
             employeePersonalInfoObj.fillEmployeeInfo(infoData.FirstName, infoData.LastName);
             employeeTableObj.clickEmployeeListTap();
-            
-            //let emp= employeeTableObj.getEmployeeInfo(infoData.employeeId);
-            // console.log(emp);
-            employeeTableObj.checkSearch(infoData.employeeId);
-            employeeTableObj.getJobDetails(addEmployeeObj.getEmpNumber());
+            employeeTableObj.getJobDetails(addEmployeeObj.getEmpNumber()).then(()=>{
+                employeeTableObj.checkSearch(infoData.employeeId, infoData.FirstName, infoData.MiddleName, infoData.LastName);
+            });
         })
-        
-
-
     })
-
-        //TODO: delete user
-
 })

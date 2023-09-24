@@ -1,10 +1,10 @@
-import employee from "../interfaces/employee";
-import { waitUntilVisible } from "../utils/waitUntilVisible";
+import { waitUntilVisible2 } from "../utils/waitUntilVisible";
 
 class addEmployee
 {
     private id: any;
     private empNumber: any;
+
     setEmpLoyeeId(id: string){
         this.id=id;
     }
@@ -18,7 +18,6 @@ class addEmployee
         return this.empNumber;
     }
     elements={
-    // TODO: get elements using inpector
         MainMenuItems: () => cy.get('.oxd-sidepanel-body'),
         AddEmp: () => cy.get('.oxd-button--secondary'),
         EmployeeInputName: () => cy.get('.--name-grouped-field'),
@@ -35,9 +34,13 @@ class addEmployee
     selectPIM(){
         this.elements.MainMenuItems().contains('PIM').click();
     }
-    employeePersonalDetails(){
+    employeePersonalDetails(firstName:string, lastName:string){
       cy.intercept("/web/index.php/pim/viewPersonalDetails/empNumber/"+this.getEmpNumber()).as("EmployeePersonalDetails");
         cy.visit("/web/index.php/pim/viewPersonalDetails/empNumber/"+this.getEmpNumber());
+        //This function is imported from utils and it waits for the loader until it does Not Exist
+        waitUntilVisible2(this.elements.loader());
+        //Assertion for Employee Name in the Header
+        cy.contains('.orangehrm-edit-employee-name > .oxd-text',firstName+' '+lastName).should("exist");
     }
     addNewEmployee(firstName:string, middleName:string, LastName:string, employeeId:string) :Cypress.Chainable<any> {
       return cy.wrap(undefined).then(() => {
@@ -53,14 +56,13 @@ class addEmployee
         },
       }).then((response) => {
         expect(response).property("status").to.equal(200);
-        console.log(response.body?.data.empNumber);
         this.setEmpNumber(response.body?.data.empNumber);
       });
     });
     }
 
     createLoginDetails(username: string, password: string){
-      const currentDate = new Date();
+      const currentDate= new Date();
       cy.request({
         method: "POST",
         url: "/web/index.php/api/v2/admin/users",
@@ -69,45 +71,13 @@ class addEmployee
           password: password, 
           status: true,   
           userRoleId: 2, 
+          //Used Date just to create random Username each time
           username: username+currentDate.getMilliseconds().toString()
         },
       }).then((response) => {
         expect(response).property("status").to.equal(200);
-        console.log(response.body);
       });
     }
 
-    
-
-
-    addNewEmployeeUsingUI(firstName:string, middleName:string, LastName:string){
-     this.elements.AddEmp().eq(1).click();
-     this.elements.EmployeeInputName().children().eq(0).type(firstName);
-     this.elements.EmployeeInputName().children().eq(1).type(middleName);
-     this.elements.EmployeeInputName().children().eq(2).type(LastName);
-     this.EmployeeId().then((employeeId) => {
-        this.setEmpLoyeeId(employeeId);
-      });
-     this.elements.createLoginDetailsSwitch().click();
-     const currentDate = new Date();
-     this.elements.userName().type("Hakoona"+currentDate.getMilliseconds().toString());
-     this.elements.password().eq(0).type('123456h');
-     this.elements.password().eq(1).type('123456h');
-     this.elements.saveBtn().click();
-     waitUntilVisible(this.elements.loader());
-     this.elements.editEmployeeName().should('contain',firstName+' '+LastName);
-     
-    }
-    EmployeeId(): Cypress.Chainable<any> {
-        // Return the Cypress.Chainable<string> from the .invoke('val') command
-        return this.elements.employeeId().invoke('val').then((value) => {
-          return value;
-        });
-      }
-      
-     
-
-
-    
 }
 export default addEmployee;
