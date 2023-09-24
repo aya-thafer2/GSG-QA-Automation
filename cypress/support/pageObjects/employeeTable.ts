@@ -48,7 +48,7 @@ class employeeTable
         this.elements.employeeListTap().click();
     }
 
-    getJobDetails(EmpNumber:any):Cypress.Chainable<any> {
+    getDetails(EmpNumber:any):Cypress.Chainable<any> {
         return cy.wrap(undefined).then(() => {
         //**Get Employee Job Details**
         cy.request({

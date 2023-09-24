@@ -39,7 +39,7 @@ describe("Employee's Table data validation (Add new Employee)", () => {
             employeePersonalInfoObj.fillPersonalDetails();
             employeePersonalInfoObj.fillEmployeeInfo(infoData.FirstName, infoData.LastName);
             employeeTableObj.clickEmployeeListTap();
-            employeeTableObj.getJobDetails(addEmployeeObj.getEmpNumber()).then(()=>{
+            employeeTableObj.getDetails(addEmployeeObj.getEmpNumber()).then(()=>{
                 employeeTableObj.checkSearch(infoData.employeeId, infoData.FirstName, infoData.MiddleName, infoData.LastName);
             });
         })
