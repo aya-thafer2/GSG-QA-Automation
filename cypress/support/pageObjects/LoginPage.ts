@@ -7,6 +7,7 @@ class LoginPage{
         forgetPassword:()=>cy.get(".orangehrm-login-forgot-header"),
         resetUserName:()=>cy.get(".oxd-input"),
         resetBtn:()=>cy.get(".orangehrm-forgot-password-button--reset"),
+        Dashboard:()=>cy.get('.oxd-topbar-header-title'),
         forgetPasswordTitle:()=>cy.get('.orangehrm-forgot-password-title')
     }
 
@@ -14,6 +15,8 @@ class LoginPage{
         this.elements.userName().type(userName);
         this.elements.password().type(password);
         this.elements.loginBtn().click();
+        cy.contains('.oxd-topbar-header-title',"Dashboard").should("exist");
+
     }
     checkForgetPassword(resetUserName:string){
         this.elements.forgetPassword().click();

@@ -7,10 +7,10 @@ describe("Login", () => {
     cy.intercept("/web/index.php/dashboard/index").as("LoginPage");
     cy.visit("/"); //https://opensource-demo.orangehrmlive.com >>> baseUrl in cypress.config.js
   });
-  it("Check login", () => {
-    LoginObj.login("Admin", "admin123");
+  it.only("Login - Check login", () => {
+    LoginObj.login("Admin", " ");
   });
-  it('Check forget password', () => {
+  it('Login - Check forget password', () => {
     LoginObj.checkForgetPassword("Admin");
   }
   )

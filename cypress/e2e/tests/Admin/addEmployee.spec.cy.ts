@@ -24,7 +24,7 @@ describe("Employee's Table data validation (Add new Employee)", () => {
         })
     })
 
-    it('Fill the Employee information',()=>{
+    it('Employee - Fill the Employee information',()=>{
         cy.get('@EmpInfo').then((infoData: any)=>{
             addEmployeeObj.employeePersonalDetails(infoData.FirstName, infoData.LastName);
             employeePersonalInfoObj.fillPersonalDetails();
@@ -32,7 +32,7 @@ describe("Employee's Table data validation (Add new Employee)", () => {
         })
     })
 
-    it('Search by Employee ID', () => {
+    it('Employee - Search by Employee ID', () => {
         //Fill the Employee information then Search
         cy.get('@EmpInfo').then((infoData: any)=>{
             addEmployeeObj.employeePersonalDetails(infoData.FirstName, infoData.LastName);
