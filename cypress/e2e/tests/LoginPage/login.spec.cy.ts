@@ -8,7 +8,7 @@ describe("Login", () => {
     cy.visit("/"); //https://opensource-demo.orangehrmlive.com >>> baseUrl in cypress.config.js
   });
   it.only("Login - Check login", () => {
-    LoginObj.login("Admin", " ");
+    LoginObj.login("Admin", "admin123");
   });
   it('Login - Check forget password', () => {
     LoginObj.checkForgetPassword("Admin");
