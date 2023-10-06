@@ -14,6 +14,7 @@ module.exports = defineConfig({
     env: {
       allureReuseAfterSpec: true,
       download_dir: "./cypress/downloads",
+      snapshotOnly: true
     },
     "retries":{
       "runMode":1,
