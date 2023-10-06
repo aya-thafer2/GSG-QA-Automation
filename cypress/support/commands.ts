@@ -24,13 +24,31 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-declare namespace Cypress{
-    interface Chainable<Subject>{
-        getByPlaceholder : typeof getByPlaceholder;
-    }
-} 
 
-function getByPlaceholder(field: string){
-    return cy.get('[placeholder="'+field+'"]');
+declare namespace Cypress {
+    interface Chainable<Subject> {
+        getByPlaceholder: typeof getByPlaceholder;
+        addUser: typeof addUser;
+    }
+}
+
+//----------------------------------------------------------------
+function getByPlaceholder(field: string) {
+    return cy.get('[placeholder="' + field + '"]');
 }
 Cypress.Commands.add('getByPlaceholder', getByPlaceholder);
+
+
+//----------------------------------------------------------------
+const URLs = {
+    users: `${Cypress.config().baseUrl}/api/users`
+}
+function addUser(payload: any) {
+    return cy.api({
+        method: "POST",
+        url: URLs.users,
+        body: payload,
+    });
+}
+Cypress.Commands.add('addUser', addUser);
+

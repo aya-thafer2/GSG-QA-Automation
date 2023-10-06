@@ -1,5 +1,5 @@
-import LoginPage from "../../../support/pageObjects/LoginPage";
-import DashboardActions from "../../../support/pageObjects/dashboard/actions";
+import LoginPage from "../../../../support/pageObjects/OrangeHRM/LoginPage";
+import DashboardActions from "../../../../support/pageObjects/OrangeHRM/dashboard/actions";
 const LoginObj:LoginPage = new LoginPage();
 const DashboardActionsObj:DashboardActions = new DashboardActions();
 

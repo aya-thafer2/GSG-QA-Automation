@@ -1,4 +1,4 @@
-import { waitUntilVisible2 } from "../utils/waitUntilVisible";
+import { waitUntilVisible2 } from "../../utils/waitUntilVisible";
 
 class employeeTable
 {
