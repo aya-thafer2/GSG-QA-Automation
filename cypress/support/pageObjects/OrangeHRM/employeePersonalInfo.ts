@@ -1,7 +1,7 @@
 import {
   waitUntilVisible,
   waitUntilVisible2,
-} from "../../utils/waitUntilVisible";
+} from "../../utils/OrangeHRM/waitUntilVisible";
 
 class employeePersonalInfo {
   elements = {

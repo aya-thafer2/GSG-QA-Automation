@@ -1,30 +1,11 @@
-const baseUrl = Cypress.config().baseUrl;
+import userInit from "../../init/Conduit/userInit"
 
-const URLs = {
-    users: `${baseUrl}/api/users`
-}
-export default class addUser {
-    static conduitNewUserUsingAPI(username: string, email: string, password: string) {
-        cy.api({
-            method: 'POST',
-            url: URLs.users,
-            body:
-            {
-                user: {
-                    username: username,
-                    email: email,
-                    password: password
-                }
-            }
-        })
-    }
-
-    static conduitNewUserUsingAPI2(payload: any) {
-        return cy.api({
-            method: 'POST',
-            url: URLs.users,
-            body: payload
-        })
-    }
+export const URLs = {
+    users: 'https://conduit.productionready.io/api/users'
 }
 
+export default class addNewUser {
+    static addNewUserViaAPI() {
+        cy.addNewUser(URLs.users, userInit.initUser(),)
+    }
+} 

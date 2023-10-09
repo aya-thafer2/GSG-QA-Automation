@@ -1,4 +1,4 @@
-import LoginPage from "../../../support/pageObjects/LoginPage";
+import LoginPage from "../../../../support/pageObjects/OrangeHRM/LoginPage";
 const LoginObj: LoginPage = new LoginPage();
 
 let userID: any;

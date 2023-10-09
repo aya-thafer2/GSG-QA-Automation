@@ -1,6 +1,7 @@
+//FOR Practice Only 
 const { faker } = require('@faker-js/faker');
-import addUser from "../../../../support/helpers/Conduit/signupHelper";
-import genericFunctions from "../../../../support/helpers/Conduit/genericFunctions";
+import addUser from "../../../../support/helpers/Conduit-practice/signupHelper";
+import genericFunctions from "../../../../support/helpers/Conduit-practice/genericFunctions";
 
 describe("Conduit - Signup Account", () => {
 

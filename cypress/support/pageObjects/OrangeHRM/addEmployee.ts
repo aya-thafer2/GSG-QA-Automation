@@ -1,4 +1,4 @@
-import { waitUntilVisible2 } from "../../utils/waitUntilVisible";
+import { waitUntilVisible2 } from "../../utils/OrangeHRM/waitUntilVisible";
 
 class addEmployee {
   private id: any;

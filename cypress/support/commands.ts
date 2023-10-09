@@ -33,6 +33,7 @@ declare namespace Cypress {
 }
 
 //----------------------------------------------------------------
+//OrangeHRM
 function getByPlaceholder(field: string) {
     return cy.get('[placeholder="' + field + '"]');
 }
@@ -40,13 +41,15 @@ Cypress.Commands.add('getByPlaceholder', getByPlaceholder);
 
 
 //----------------------------------------------------------------
-const URLs = {
-    users: `${Cypress.config().baseUrl}/api/users`
-}
+//Conduit Practice
+// const URLs = {
+//     users: `${Cypress.config().baseUrl}/api/users`
+// }
 function addUser(payload: any) {
     return cy.api({
         method: "POST",
-        url: URLs.users,
+        // url: URLs.users,
+        url: 'https://conduit.productionready.io/api/users',
         body: payload,
     });
 }
