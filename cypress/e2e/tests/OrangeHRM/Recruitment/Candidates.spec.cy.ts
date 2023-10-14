@@ -1,3 +1,4 @@
+//OrangeHRM-Task1
 import checkCandidates from "../../../../support/helpers/OrangeHRM/CandidatesHelper";
 import LoginPage from "../../../../support/pageObjects/OrangeHRM/LoginPage";
 const LoginObj: LoginPage = new LoginPage();

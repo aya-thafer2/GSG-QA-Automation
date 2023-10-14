@@ -1,3 +1,4 @@
+//OrangeHRM-Task1
 import Candidates from "../../pageObjects/OrangeHRM/Recruitment/Candidates";
 const CandidatesObj: Candidates = new Candidates();
 const { faker } = require('@faker-js/faker');
