@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@cypress/grep": "^4.0.0",
     "@shelex/cypress-allure-plugin": "^2.40.0",
     "allure-commandline": "^2.24.0",
     "cross-env": "^7.0.3",
@@ -15,5 +16,8 @@
     "clear:allure": "rimraf allure-results allure-results-aggregated-files allure-report",
     "clear:cypress": "rimraf cypress/screenshots cypress/videos",
     "cypress": "npm run allure:clear && npx cypress run --browser chrome --spec cypress/e2e/tests/LoginPage/login.spec.cy.ts --env allure=true || npm run 1 && npm run allure:report"
+  },
+  "dependencies": {
+    "cypress-plugin-api": "^2.11.1"
   }
 }
