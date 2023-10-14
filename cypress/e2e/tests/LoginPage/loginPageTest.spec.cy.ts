@@ -1,5 +1,5 @@
 
-import LoginTest from "../../../support/pageObjects/LoginTest";
+import LoginTest from "../../../support/pageObjects/OrangeHRM/LoginTest";
 
 const LoginObj: LoginTest = new LoginTest();
 describe("Login Page", () => {

@@ -1,4 +1,4 @@
-import LoginPage from "../../../support/pageObjects/LoginPage";
+import LoginPage from "../../../support/pageObjects/OrangeHRM/LoginPage";
 const LoginObj: LoginPage = new LoginPage();
 
 let userID: any;
@@ -28,7 +28,7 @@ describe("AdminAPI", () => {
 
   //   return randomName;
   // }
-  
+
   // FIXME: rewerite this using function from loginPageObj
   it("Create user", () => {
     cy.request({
@@ -49,14 +49,14 @@ describe("AdminAPI", () => {
   });
   //Delete user
   afterEach(() => {
-    
+
     cy.request({
       method: "DELETE",
       url: "/web/index.php/api/v2/admin/users",
       body: {
         ids: [userID],
       },
-    }).then((response)=>{
+    }).then((response) => {
       expect(response).property("status").to.equal(200);
     });
   });
