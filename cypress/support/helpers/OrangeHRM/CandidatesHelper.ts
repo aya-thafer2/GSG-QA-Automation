@@ -22,39 +22,5 @@ export default class checkCandidates {
             this.checkCount(APItotal);
         })
     }
-    static shortlistCandidateViaAPI(){
-        cy.request({
-            method:'PUT',
-            url:`/web/index.php/api/v2/recruitment/candidates/${this.getId()}/shortlist`,
-            body:{note: null}
-        }).then((response)=>{
-            console.log(response);
-            cy.visit(`/web/index.php/recruitment/addCandidate/${this.getId()}`);
-            CandidatesObj.clickScheduleInterviewBtn();
-            CandidatesObj.fillScheduleInterviewData();
-        })
-    }
-    static addCandidateViaAPI(){
-        
-        cy.request({
-            method: 'POST',
-            url:'/web/index.php/api/v2/recruitment/candidates',
-            body:{
-                comment:null,
-                consentToKeepData:false,
-                contactNumber:null,
-                dateOfApplication:"2023-10-14",
-                email:faker.internet.email(),
-                firstName:faker.internet.userName(),
-                keywords:null,
-                lastName:faker.internet.userName(),
-                middleName:null,
-                vacancyId: 4
-            }
-        }).then((response)=>{
-            console.log(response);
-            this.setId(response.body.data.id);
-            this.shortlistCandidateViaAPI();
-        })
-    }
+  
 }
