@@ -13,8 +13,4 @@ describe("Recruitment - Candidates", () => {
     checkCandidates.checkCandidatesCount();
   });
 
-  it.only("Recruitment - Schedule Interview for Candidates", () => {
-    checkCandidates.addCandidateViaAPI();
-  });
-
 });
