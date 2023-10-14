@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { waitUntilVisible2 } from "../../utils/OrangeHRM/waitUntilVisible";
+=======
+import { waitUntilVisible2 } from "../../utils/waitUntilVisible";
+>>>>>>> 14aa070290149225ca15d996508aebad7a7cf9f2
 
 class addEmployee {
   private id: any;
@@ -17,6 +21,7 @@ class addEmployee {
     return this.empNumber;
   }
   elements = {
+<<<<<<< HEAD
     MainMenuItems: () => cy.get(".oxd-sidepanel-body"),
     AddEmp: () => cy.get(".oxd-button--secondary"),
     EmployeeInputName: () => cy.get(".--name-grouped-field"),
@@ -58,6 +63,33 @@ class addEmployee {
     LastName: string,
     employeeId: string
   ): Cypress.Chainable<any> {
+=======
+    MainMenuItems: () => cy.get('.oxd-sidepanel-body'),
+    AddEmp: () => cy.get('.oxd-button--secondary'),
+    EmployeeInputName: () => cy.get('.--name-grouped-field'),
+    employeeId: () => cy.get('.oxd-grid-item > .oxd-input-group > :nth-child(2) > .oxd-input'),
+    saveNewEmp: () => cy.get('button[type="submit"]'),
+    createLoginDetailsSwitch: () => cy.get('.oxd-switch-wrapper'),
+    userName: () => cy.get(':nth-child(4) > .oxd-grid-2 > :nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-input'),
+    password: () => cy.get('[type="password"]'),
+    saveBtn: () => cy.get('[type="submit"]'),
+    editEmployeeName: () => cy.get('.orangehrm-edit-employee-name'),
+    loader: () => cy.get('.oxd-loading-spinner')
+  }
+
+  selectPIM() {
+    this.elements.MainMenuItems().contains('PIM').click();
+  }
+  employeePersonalDetails(firstName: string, lastName: string) {
+    cy.intercept("/web/index.php/pim/viewPersonalDetails/empNumber/" + this.getEmpNumber()).as("EmployeePersonalDetails");
+    cy.visit("/web/index.php/pim/viewPersonalDetails/empNumber/" + this.getEmpNumber());
+    //This function is imported from utils and it waits for the loader until it does Not Exist
+    waitUntilVisible2(this.elements.loader());
+    //Assertion for Employee Name in the Header
+    cy.contains('.orangehrm-edit-employee-name > .oxd-text', firstName + ' ' + lastName).should("exist");
+  }
+  addNewEmployee(firstName: string, middleName: string, LastName: string, employeeId: string): Cypress.Chainable<any> {
+>>>>>>> 14aa070290149225ca15d996508aebad7a7cf9f2
     return cy.wrap(undefined).then(() => {
       cy.request({
         method: "POST",
@@ -67,7 +99,11 @@ class addEmployee {
           middleName: middleName,
           lastName: LastName,
           empPicture: null,
+<<<<<<< HEAD
           employeeId: employeeId,
+=======
+          employeeId: employeeId
+>>>>>>> 14aa070290149225ca15d996508aebad7a7cf9f2
         },
       }).then((response) => {
         expect(response).property("status").to.equal(200);
@@ -87,11 +123,21 @@ class addEmployee {
         status: true,
         userRoleId: 2,
         //Used Date just to create random Username each time
+<<<<<<< HEAD
         username: username + currentDate.getMilliseconds().toString(),
+=======
+        username: username + currentDate.getMilliseconds().toString()
+>>>>>>> 14aa070290149225ca15d996508aebad7a7cf9f2
       },
     }).then((response) => {
       expect(response).property("status").to.equal(200);
     });
   }
+<<<<<<< HEAD
 }
 export default addEmployee;
+=======
+
+}
+export default addEmployee;
+>>>>>>> 14aa070290149225ca15d996508aebad7a7cf9f2

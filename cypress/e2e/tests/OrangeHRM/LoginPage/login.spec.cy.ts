@@ -1,4 +1,8 @@
 import LoginPage from "../../../../support/pageObjects/OrangeHRM/LoginPage";
+<<<<<<< HEAD
+=======
+
+>>>>>>> 14aa070290149225ca15d996508aebad7a7cf9f2
 const LoginObj: LoginPage = new LoginPage();
 
 describe("Login", () => {

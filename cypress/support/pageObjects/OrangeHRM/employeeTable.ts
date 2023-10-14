@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { waitUntilVisible2 } from "../../utils/OrangeHRM/waitUntilVisible";
+=======
+import { waitUntilVisible2 } from "../../utils/waitUntilVisible";
+>>>>>>> 14aa070290149225ca15d996508aebad7a7cf9f2
 
 class employeeTable {
     private JobTitle: any;

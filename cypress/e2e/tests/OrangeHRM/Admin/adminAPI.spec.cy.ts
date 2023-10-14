@@ -28,7 +28,7 @@ describe("AdminAPI", () => {
 
   //   return randomName;
   // }
-  
+
   // FIXME: rewerite this using function from loginPageObj
   it("Create user", () => {
     cy.request({
@@ -49,7 +49,7 @@ describe("AdminAPI", () => {
   });
   //Delete user
   afterEach(() => {
-    
+
     cy.request({
       method: "DELETE",
       url: "/web/index.php/api/v2/admin/users",

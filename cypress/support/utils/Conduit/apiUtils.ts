@@ -22,4 +22,8 @@ Cypress.Commands.add('addNewUser', (requestURL: string, userPayload: CreateEmplo
             'Content-Type': 'application/json'
         }
     }).its('body');
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 14aa070290149225ca15d996508aebad7a7cf9f2

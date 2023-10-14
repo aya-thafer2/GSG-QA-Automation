@@ -54,4 +54,7 @@ function addUser(payload: any) {
     });
 }
 Cypress.Commands.add('addUser', addUser);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 14aa070290149225ca15d996508aebad7a7cf9f2

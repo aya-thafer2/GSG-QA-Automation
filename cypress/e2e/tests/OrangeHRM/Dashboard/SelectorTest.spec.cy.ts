@@ -11,6 +11,10 @@ describe("Time at Work",()=>{
     })
 //TODO: rami said sth abt branch on Github ++ finish this
     it("Dashboard - Select Time",()=>{
+<<<<<<< HEAD
        // DashboardActionsObj.getTimeAtWorkCard().then();
+=======
+       // DashboardActionsObj.getTimeAtWorkCard().then(); 
+>>>>>>> 14aa070290149225ca15d996508aebad7a7cf9f2
     })
 })
