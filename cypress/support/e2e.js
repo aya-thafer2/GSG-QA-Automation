@@ -18,5 +18,6 @@ import './commands'
 import '@shelex/cypress-allure-plugin';
 import 'cypress-plugin-api';
 import '../support/utils/Conduit/apiUtils'
+import '../support/utils/OrangeHRM/apiUtils'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

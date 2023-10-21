@@ -8,6 +8,6 @@ export const URLs = {
 
 export default class addNewUser {
     static addNewUserViaAPI() {
-        cy.addNewUser(URLs.users, userInit.initUser(),)
+        cy.addNewUser(URLs.users, userInit.initUser())
     }
 } 

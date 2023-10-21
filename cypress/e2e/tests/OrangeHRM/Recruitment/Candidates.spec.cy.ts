@@ -16,5 +16,8 @@ describe("Recruitment - Candidates", () => {
   it.only("Recruitment - Schedule Interview for Candidates", () => {
     checkCandidates.addCandidateViaAPI();
   });
+  // it.only("Recruitment - Search for Candidate in the Table", () => {
+  //   checkCandidates.searchForRow();
+  // });
 
 });

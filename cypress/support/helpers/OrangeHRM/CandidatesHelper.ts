@@ -1,4 +1,5 @@
 import Candidates from "../../pageObjects/OrangeHRM/Recruitment/Candidates";
+
 const CandidatesObj: Candidates = new Candidates();
 const { faker } = require('@faker-js/faker');
 
@@ -57,4 +58,32 @@ export default class checkCandidates {
             this.shortlistCandidateViaAPI();
         })
     }
+
+    // static addCandidateViaAPI2(){
+        
+    //     cy.request({
+    //         method: 'POST',
+    //         url:'/web/index.php/api/v2/recruitment/candidates',
+    //         body:{
+    //             comment:null,
+    //             consentToKeepData:false,
+    //             contactNumber:null,
+    //             dateOfApplication:"2023-10-14",
+    //             email:faker.internet.email(),
+    //             firstName:faker.internet.userName(),
+    //             keywords:null,
+    //             lastName:faker.internet.userName(),
+    //             middleName:null,
+    //             vacancyId: 4
+    //         }
+    //     }).then((response)=>{
+    //         console.log(response);
+    //     })
+
+        
+    // }
+    // static searchForRow(){
+    //     this.addCandidateViaAPI2();
+        
+    // }
 }
