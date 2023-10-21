@@ -27,7 +27,10 @@ class addEmployee {
     password: () => cy.get('[type="password"]'),
     saveBtn: () => cy.get('[type="submit"]'),
     editEmployeeName: () => cy.get('.orangehrm-edit-employee-name'),
-    loader: () => cy.get('.oxd-loading-spinner')
+    loader: () => cy.get('.oxd-loading-spinner'),
+
+    dropDown:()=>cy.get('.oxd-userdropdown-tab > .oxd-icon'),
+    logout:()=>cy.get(':nth-child(4) > .oxd-userdropdown-link')
   }
 
   selectPIM() {
@@ -70,12 +73,16 @@ class addEmployee {
         password: password,
         status: true,
         userRoleId: 2,
-        //Used Date just to create random Username each time
-        username: username + currentDate.getMilliseconds().toString()
+        username: username
       },
     }).then((response) => {
       expect(response).property("status").to.equal(200);
     });
+  }
+
+  logout(){
+    this.elements.dropDown().click()
+    this.elements.logout().click()
   }
 
 }
