@@ -1,4 +1,4 @@
-//OrangeHRM-Task1
+//OrangeHRM-Task2
 import checkCandidates from "../../../../support/helpers/OrangeHRM/CandidatesHelper";
 import LoginPage from "../../../../support/pageObjects/OrangeHRM/LoginPage";
 const LoginObj: LoginPage = new LoginPage();
@@ -12,6 +12,9 @@ describe("Recruitment - Candidates", () => {
 
   it("Recruitment - Check the Count of Candidates", () => {
     checkCandidates.checkCandidatesCount();
+  });
+  it.only("Recruitment - Schedule Interview for Candidates", () => {
+    checkCandidates.addCandidateViaAPI();
   });
 
 });
