@@ -11,13 +11,15 @@ class LoginPage{
         forgetPasswordTitle:()=>cy.get('.orangehrm-forgot-password-title')
     }
 
-    login(userName:string, password:string){
+    login(userName:string, password:string):Cypress.Chainable<any>{
+        return cy.wrap(undefined).then(() => {
         this.elements.userName().type(userName);
         this.elements.password().type(password);
         this.elements.loginBtn().click();
         cy.contains('.oxd-topbar-header-title',"Dashboard").should("exist");
-
+    });
     }
+
     checkForgetPassword(resetUserName:string){
         this.elements.forgetPassword().click();
         this.elements.resetUserName().type(resetUserName);
