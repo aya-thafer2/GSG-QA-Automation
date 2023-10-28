@@ -1,12 +1,8 @@
 import addNewEmployee from "../../../../support/helpers/OrangeHRM/EmployeeHelper";
 import LoginPage from "../../../../support/pageObjects/OrangeHRM/LoginPage";
 import addEmployee from "../../../../support/pageObjects/OrangeHRM/addEmployee";
-import employeePersonalInfo from "../../../../support/pageObjects/OrangeHRM/employeePersonalInfo";
-import employeeTable from "../../../../support/pageObjects/OrangeHRM/employeeTable";
 const LoginObj: LoginPage = new LoginPage();
 const addEmployeeObj: addEmployee = new addEmployee();
-const employeePersonalInfoObj: employeePersonalInfo = new employeePersonalInfo();
-const employeeTableObj: employeeTable = new employeeTable();
 
 describe("Time: Create TimeSheets Process", () => {
     beforeEach(() => {
