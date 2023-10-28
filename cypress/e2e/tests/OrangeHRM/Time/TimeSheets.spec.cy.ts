@@ -17,9 +17,7 @@ describe("Time: Create TimeSheets Process", () => {
         cy.fixture('employeeInfo').as('EmpInfo');
         cy.get('@EmpInfo').then((data: any) => {
             addEmployeeObj.addNewEmployee(data.FirstName, data.MiddleName, data.LastName, data.employeeId).then(() => {
-                addEmployeeObj.createLoginDetails(data.username, data.password).then(() => {
-                    addEmployeeObj.addLeaveEntitlement();
-                })
+                addEmployeeObj.createLoginDetails(data.username, data.password)
             });
         })
         addNewEmployee.logout();
