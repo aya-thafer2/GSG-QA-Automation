@@ -26,8 +26,6 @@ describe("Time: Create TimeSheets Process", () => {
     })
 
     afterEach(() => {
-        addNewEmployee.logout();
-        LoginObj.login("Admin", "admin123")
         addEmployeeObj.deleteEmployee()
     })
 
