@@ -4,7 +4,7 @@ import { Assertion } from "chai";
 class addEmployee {
   private id: any;
   private empNumber: any;
-  private userName: string='';
+  private userName: any
   private leaveId: any;
 
   setEmpLoyeeId(id: string) {
@@ -52,7 +52,12 @@ class addEmployee {
     passwordEmp: () => cy.getByPlaceholder('Password'),
     loginBtnEmp: () => cy.get('button'),
 
-    leaveTable: () => cy.get('.oxd-table-body')
+    leaveTable: () => cy.get('.oxd-table-body'),
+
+    employeeNameInput: () => cy.get('.oxd-autocomplete-text-input > input'),
+    selectEmployee: () => cy.get('.oxd-autocomplete-option'),
+    viewBtn: () => cy.get('.oxd-form-actions > .oxd-button'),
+    submitStatus: () => cy.get('.orangehrm-timesheet-footer--title > .oxd-text')
   }
 
   selectPIM() {
@@ -114,30 +119,30 @@ class addEmployee {
     cy.request({
       method: "POST",
       url: `/web/index.php/api/v2/leave/leave-entitlements`,
-      body:{
-        empNumber: this.getEmpNumber(), 
-        leaveTypeId: 8, 
-        fromDate: "2023-01-01", 
-        toDate: "2023-12-31", 
+      body: {
+        empNumber: this.getEmpNumber(),
+        leaveTypeId: 8,
+        fromDate: "2023-01-01",
+        toDate: "2023-12-31",
         entitlement: "40"
       }
-      
+
     }).then((response) => {
       expect(response).property("status").to.equal(200);
     });
   }
-  
-  applyLeave(){
+
+  applyLeave() {
     cy.request({
       method: "POST",
       url: `/web/index.php/api/v2/leave/leave-requests`,
-      body:{
-        leaveTypeId: 8, 
-        fromDate: "2023-10-30", 
-        toDate: "2023-10-30", 
+      body: {
+        leaveTypeId: 8,
+        fromDate: "2023-10-30",
+        toDate: "2023-10-30",
         comment: null
       }
-      
+
     }).then((response) => {
       console.log(response.body.data.id);
       this.setLeaveId(response.body.data.id);
@@ -145,14 +150,14 @@ class addEmployee {
     });
   }
 
-  adminApprovesLeave(){
+  adminApprovesLeave() {
     cy.request({
       method: "PUT",
       url: `/web/index.php/api/v2/leave/employees/leave-requests/${this.getLeaveId()}`,
-      body:{
+      body: {
         action: "APPROVE"
       }
-      
+
     }).then((response) => {
       console.log(response);
       expect(response).property("status").to.equal(200);
@@ -163,11 +168,11 @@ class addEmployee {
     this.elements.MainMenuItems().contains('Leave').click();
   }
 
-  leaveAssertion(){
+  leaveAssertion() {
     cy.contains('.oxd-table-card > .oxd-table-row', 'Scheduled').should("exist");
   }
 
-  deleteEmployee(){
+  deleteEmployee() {
     cy.request({
       method: "DELETE",
       url: "/web/index.php/api/v2/pim/employees",
@@ -177,6 +182,19 @@ class addEmployee {
     }).then((response) => {
       expect(response).property("status").to.equal(200);
     });
+  }
+
+  searchEmployeeName(firstName: string, middleName: string, lastName: string) {
+    this.elements.employeeNameInput().type(`${firstName} ${middleName} ${lastName}`, { force: true })
+  }
+  selectEmployeeName() {
+    this.elements.selectEmployee().click({ force: true })
+  }
+  clickViewBtn() {
+    this.elements.viewBtn().click({ force: true })
+  }
+  statusAssertion() {
+    this.elements.submitStatus().should('contain', "Status: Submitted");
   }
 }
 export default addEmployee;
