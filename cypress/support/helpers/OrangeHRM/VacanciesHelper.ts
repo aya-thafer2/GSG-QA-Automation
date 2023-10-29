@@ -1,5 +1,6 @@
 import Vacancies from "../../pageObjects/OrangeHRM/Recruitment/Vacancies";
 const vacanciesObj = new Vacancies();
+import * as path from 'path';
 
 export default class vacanciesHelper {
 
@@ -57,8 +58,8 @@ export default class vacanciesHelper {
         this.setNewVacancyData(
             {
                 name: "QA",
-                jobTitleId: 9,
-                employeeId: 2,
+                jobTitleId: 22,
+                employeeId: 7,
                 numOfPositions: null,
                 description: "",
                 status: true,
@@ -93,4 +94,20 @@ export default class vacanciesHelper {
         });
     }
 
+    static downloadAttachment() {
+        vacanciesObj.clickDownloadAttachmentBtn();
+        cy.wait(2000)
+        cy.log('*************** File Downloaded Successfully ***************')
+    }
+
+    static convertXlsxToJson() {
+        const xlsxPath: string = 'cypress/downloads/Vacancy.xlsx';
+        const jsonName: string = path.basename(xlsxPath).replace('xlsx', 'json');
+        cy.task('convertXlsxToJson', xlsxPath);
+        cy.fixture(jsonName).as('userInfo');
+        cy.log(jsonName);
+        cy.get('@userInfo').should('have.length', 1).then((userInfo:any)=>{
+            expect(userInfo[0]['Name']).to.equal('Hakoona Matata')
+        })
+    }
 }

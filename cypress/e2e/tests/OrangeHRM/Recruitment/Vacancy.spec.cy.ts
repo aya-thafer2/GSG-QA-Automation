@@ -14,10 +14,16 @@ describe("Recruitment - Vacancies attached files", () => {
         vacanciesHelper.deleteVacancy();
     });
 
-
     it("Vacancy: Attach Excel File", () => {
         vacanciesHelper.attachFile();
         vacanciesHelper.attachFileAssertion();
+    });
+
+    it.only("Vacancy: Check Downloaded Excel File", () => {
+        vacanciesHelper.attachFile();
+        vacanciesHelper.attachFileAssertion();
+        vacanciesHelper.downloadAttachment();
+        vacanciesHelper.convertXlsxToJson();
     });
 
 });
