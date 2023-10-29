@@ -3,7 +3,7 @@ class buzz {
     elements = {
         MainMenuItems: () => cy.get('.oxd-sidepanel-body'),
         postInput: () => cy.get('.oxd-buzz-post-input'),
-        postBtn: () => cy.get(".oxd-button"),
+        pageBtns: () => cy.get(".oxd-button"),
         toastAlert: () => cy.get('.oxd-toast')
     }
 
@@ -14,7 +14,7 @@ class buzz {
         this.elements.postInput().type(post);
     }
     clickPost() {
-        this.elements.postBtn().contains("Post").click()
+        this.elements.pageBtns().contains("Post").click()
     }
     assertion(post: any) {
         this.elements.toastAlert().should('not.exist');
